@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latvijas Universitāte | MI Informētā Piekrišana Un Risku Novērtējums</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts: Inter & Playfair Display (LU Brand Aesthetics) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        lu: {
+                            blue: '#002855',        // Primary LU Dark Blue
+                            blueHover: '#001e40',
+                            burgundy: '#7A0026',    // LU Burgundy Accent
+                            burgundyDark: '#58001b',
+                            silver: '#B1B3B3',      // LU Silver/Gold Accent
+                            gold: '#C5A059',
+                            goldLight: '#E8D5B5',
+                            slate: '#2D3748',
+                            bg: '#F8F9FA'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        /* Print styles for official PDF/Certificate output */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            .print-card {
+                box-shadow: none !important;
+                border: 1px solid #cbd5e1 !important;
+            }
+        }
+
+        /* Touch & signature canvas usability */
+        #signature-pad {
+            touch-action: none;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body class="bg-lu-bg text-lu-slate font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Wizard Card Box -->
+        <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden flex flex-col">
+
+            <!-- Wizard Progress Header (No Print) -->
+            <div class="bg-lu-blue text-white p-6 border-b border-slate-800 no-print">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                    <span class="text-xs font-semibold text-lu-silver uppercase tracking-wider flex items-center gap-1.5">
+                        LU Mākslīgā Intelekta informētā piekrišana
+                    </span>
+                    <span id="wizard-step-badge" class="text-xs font-bold text-white px-3 py-1 self-start sm:self-auto">
+                        Solis 1 no 4
+                    </span>
+                </div>
+                <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden p-0.5 border border-slate-700">
+                    <div id="wizard-progress-bar" class="bg-gradient-to-r from-lu-silver to-lu-silver h-full w-1/4 rounded-full transition-all duration-300"></div>
+                </div>
+            </div>
+
+            <!-- Wizard Content Form Area -->
+            <div class="p-6 sm:p-8 flex-grow">
+
+                <!-- STEP 1: 4 Key Risks (Visual Infographic Style) -->
+                <div id="step-1" class="wizard-step space-y-6">
+                    <div class="pl-4 py-1">
+                        <h3 class="text-lg font-bold text-lu-blue">Mākslīgā Intelekta (MI) Lietošana LU Studiju Procesā</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mt-1">
+                          Šis dokuments papildina iestādes MI lietošanas nolikumu un informē lietotāju par individuālajiem riskiem, kas var rasties, izmantojot mākslīgā intelekta rīkus mācību, darba vai saziņas procesā.
+                          MI rīki var palīdzēt sagatavot idejas, strukturēt informāciju, skaidrot jēdzienus, uzlabot tekstu un atbalstīt mācīšanos.
+                        </p>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mt-1">
+                          Vienlaikus lietotājam jāapzinās, ka MI ir atbalsta rīks, nevis cilvēka domāšanas, profesionālā sprieduma vai atbildības aizvietotājs. Lietojot MI rīkus, padomā par 4 galvenajiem riskiem, ko uzņemies to darot:
+                        </p>
+                    </div>
+
+                    <!-- 4 Risk Cards Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Risk 1 -->
+                        <div class="p-5 rounded-xl border border-lu-silver hover:shadow-md transition-shadow">
+                            <div class="flex items-center gap-3 text-lu-blue font-bold mb-2">
+                                <h4 class="text-sm"> Personas datu un privātuma risks</h4>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Publiskajos MI rīkos kategoriski aizliegts ievadīt personas datus: vārdus, uzvārdus, personas kodus, fotogrāfijas.
+                            </p>
+                            <p class="text-xs text-slate-600 leading-relaxed mt-2">
+                                <em><strong>Kapēc?</strong>  Publiskie MI rīki izmanto lietotāju ievaddatus to trennēšanai un citiem mērķiem. Šie dati, atrodoties MI rīku serveros, nav anonimizēti vai privāti.</em>
+                            </p>
+                        </div>
+
+                        <div class="p-5 rounded-xl border border-lu-silver hover:shadow-md transition-shadow">
+                            <div class="flex items-center gap-3 text-lu-blue font-bold mb-2">
+                                <h4 class="text-sm"> Nepareizas informācijas risks</h4>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                MI var sniegt kļūdainu, nepilnīgu vai izdomātu informāciju, kas izskatās ticama. MI sniegtie fakti, avoti, aprēķini un secinājumi vienmēr jāpārbauda.
+                            </p>
+                            <p class="text-xs text-slate-600 leading-relaxed mt-2">
+                                <em><strong>Kapēc?</strong>  Pat vislabākie MI rīki halucionē, ģenerējot aplamu bet ticamu informāciju. Arī treniņdatos esošās kļūdas var tikt atspoguļotas MI rīka rezultātos.</em>
+                            </p>
+                        </div>
+
+                        <div class="p-5 rounded-xl border border-lu-silver hover:shadow-md transition-shadow">
+                            <div class="flex items-center gap-3 text-lu-blue font-bold mb-2">
+                                <h4 class="text-sm"> Pārmērīgas paļaušanās risks</h4>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                MI nedrīkst aizstāt lietotāja domāšanu, mācīšanās procesu vai problēmu risināšanu. Lietotājam jāspēj paskaidrot un pamatot rezultātu, arī, ja lai piko viņš izmantoe tā nonāktu ir lietots MI rīks.
+                            </p>
+                            <p class="text-xs text-slate-600 leading-relaxed mt-2">
+                                <em><strong>Kapēc?</strong>  Bez lietotāja iesaistes problēmu risināšanā pazūd mācīšanās vērtība un jēga. Tāpat atbildību par gala rezultātu vienmēr jāuzņemas lietotājam, neatkarīgi no izmantotajiem rīkiem un to kvalitātes.</em>
+                            </p>
+                        </div>
+
+                        <div class="p-5 rounded-xl border border-lu-silver hover:shadow-md transition-shadow">
+                            <div class="flex items-center gap-3 text-lu-blue font-bold mb-2">
+                                <h4 class="text-sm">  Emocionālās ietekmes risks</h4>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                MI nav cilvēks. Tam nav jūtu, nodomu, izpratnes par cilvēka dzīves situāciju vai profesionālas atbildības. Nepaļaujies tikai uz MI vērtējumiem par situācijām, idejām vai mācību uzdevumu rezultātiem.
+                            </p>
+                            <p class="text-xs text-slate-600 leading-relaxed mt-2">
+                                <em><strong>Kapēc?</strong>  MI rīki ir veidoti, lai liktu mums justies labi par sevi un piekristu mūsu viedokļiem. Tādejādi tie var izraisīt aplamu priekšstatu par situācijām, un veidot parasociālu "atbalsta personu", kas nesniedz vajadzīgo atbalstu.</em>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-start items-center justify-center gap-3">
+                        <input type="checkbox" id="chk-step-1" onchange="validateCurrentStep()" class="mt-1 w-5 h-5 text-lu-blue rounded border-slate-300 focus:ring-lu-blue cursor-pointer">
+                        <label for="chk-step-1" class="text-xs text-slate-700 font-medium cursor-pointer">
+                            Esmu iepazinies/-usies ar MI lietošanas galvenajiem individuālajiem riskiem un apzinos savu atbildību.
+                        </label>
+                    </div>
+                </div>
+
+                <!-- STEP 2: LU MI Luksofora Princips -->
+                <div id="step-2" class="wizard-step hidden space-y-6">
+                    <div class="pl-4 py-1">
+                        <h3 class="text-lg font-bold text-lu-blue">MI Luksofora princips</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mt-1">
+                            Katru reizi, kad uzdevumam gribi izmantot MI, padomā, kurai no luksafora zonām, tas atbilst.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Green Zone Card -->
+                        <div class="bg-white rounded-xl p-5 relativeshadow-sm overflow-hidden">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3.5 h-3.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                    <h4 class="text-base font-extrabold text-lu-blue">ZAĻĀ ZONA — ATĻAUTS</h4>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-2">
+                                Docētājs ir devis skaidru atļauju lietot MI rīkus, un MI tiek lietots ideju ģenerēšanai, tēmas sašaurināšanai, jēdzienu skaidrošanai, pareizrakstības/stila un koda kļūdu labošai, mācību plānošanai.
+                            </p>
+                        </div>
+
+                        <!-- Yellow Zone Card -->
+                        <div class="bg-white rounded-xl p-5 relative overflow-hidden">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3.5 h-3.5 rounded-full bg-amber-500"></span>
+                                    <h4 class="text-base font-extrabold text-lu-blue">DZELTENĀ ZONA — AR NOSACĪJUMIEM</h4>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-2">
+                                Docētājs ir devis atļauju izmantot MI rīkus, vai arī to nav norādījis. MI tiek lietots informācijas apkopošanai, teksta melnraksta strukturēšanai, programmatūras kodam vai aprēķinu ģenerēšanai.
+                            </p>
+                            <div class="text-xs text-amber-900 font-semibold">
+                                Nosacījums: Visi fakti jāpārbauda, saturs un procesi, kā nonākt pie rezultāta, jāsaprot pašam, un par MI līdzdalību jāinformē.
+                            </div>
+                        </div>
+
+                        <!-- Red Zone Card -->
+                        <div class="bg-white rounded-xl p-5 relative overflow-hidden">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3.5 h-3.5 rounded-full bg-rose-500"></span>
+                                    <h4 class="text-base font-extrabold text-lu-blue">SARKANĀ ZONA — AIZLIEGTS</h4>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-600">
+                                Docētājs ir aizliedzis MI rīku lietošanu savā kursā. MI tiek ievadīti personas dati, darbs pilnībā tiek izstrādāts ar MI (to nenorādot).
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-start items-center justify-center gap-3">
+                        <input type="checkbox" id="chk-step-2" onchange="validateCurrentStep()" class="mt-1 w-5 h-5 text-lu-blue rounded border-slate-300 focus:ring-lu-blue cursor-pointer">
+                        <label for="chk-step-2" class="text-xs text-slate-700 font-medium cursor-pointer">
+                            Saprotu Luksofora principu un apņemos to ievērot.
+                        </label>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Student Self-Checklist -->
+                <div id="step-3" class="wizard-step hidden space-y-6">
+                    <div class="border-l-4 border-lu-blue pl-4 py-1">
+                        <h3 class="text-lg font-bold text-lu-blue">Pašpārbaudes jautājumi pirms MI rīka lietošanas</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mt-1">
+                            Apstiprini visus 4 paškontroles jautājumus, lai pārliecinātos, ka MI lietojums ir drošs un produktīvs:
+                        </p>
+                    </div>
+
+                    <div class="space-y-3 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                        <label class="flex items-start gap-3.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-lu-blue transition-colors">
+                            <input type="checkbox" id="chk-self-1" onchange="validateCurrentStep()" class="chk-self mt-1 w-5 h-5 text-lu-blue rounded border-slate-300">
+                            <span class="text-xs text-slate-700 leading-relaxed">
+                                <strong>1. Datu aizsardzība:</strong> Esmu pārliecinājies/-usies, ka uzvednē nav iekļauti personas dati vai konfidenciāla informācija.
+                            </span>
+                        </label>
+
+                        <label class="flex items-start gap-3.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-lu-blue transition-colors">
+                            <input type="checkbox" id="chk-self-2" onchange="validateCurrentStep()" class="chk-self mt-1 w-5 h-5 text-lu-blue rounded border-slate-300">
+                            <span class="text-xs text-slate-700 leading-relaxed">
+                                <strong>2. Izpratne:</strong> Es izmantoju MI kā mācīšanās atbalstu, nevis lai izvairītos no pašrocīga darba.
+                            </span>
+                        </label>
+
+                        <label class="flex items-start gap-3.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-lu-blue transition-colors">
+                            <input type="checkbox" id="chk-self-3" onchange="validateCurrentStep()" class="chk-self mt-1 w-5 h-5 text-lu-blue rounded border-slate-300">
+                            <span class="text-xs text-slate-700 leading-relaxed">
+                                <strong>3. Faktu pārbaude:</strong> Esmu pārbaudījis/-usi MI sniegtos faktus un atsauces.
+                            </span>
+                        </label>
+
+                        <label class="flex items-start gap-3.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-lu-blue transition-colors">
+                            <input type="checkbox" id="chk-self-4" onchange="validateCurrentStep()" class="chk-self mt-1 w-5 h-5 text-lu-blue rounded border-slate-300">
+                            <span class="text-xs text-slate-700 leading-relaxed">
+                                <strong>4. Atbildība:</strong> Esmu gatavs/-a prezentēt savu darbu un informēt pasniedzēju par MI izmantošanu.
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- STEP 4: Identification & Digital Canvas Signature -->
+                <div id="step-4" class="wizard-step hidden space-y-6">
+                    <div class="pl-4 py-1">
+                        <h3 class="text-lg font-bold text-lu-blue">Informētās piekrišanas parakstīšana</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mt-1">
+                          Paraksti apakšējo laukumu, apņemoties izmantot MI rīkus atbildīgi
+                        </p>
+                    </div>
+
+                    <!-- Canvas Signature Pad Box -->
+                    <div class="space-y-2 pt-2">
+                        <div class="flex items-center justify-between">
+                            <label class="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
+                                Rokas Paraksts (Uzvelc ar pelīti vai pirkstu) *
+                            </label>
+                        </div>
+
+                        <div class="border-2 border-dashed border-slate-300 rounded-xl bg-slate-50 relative overflow-hidden focus-within:border-lu-blue">
+                            <canvas id="signature-pad" class="w-full h-36 block touch-none"></canvas>
+                            <div id="sig-placeholder" class="absolute inset-0 flex items-center justify-center text-slate-400 text-xs pointer-events-none select-none">
+                                Ievelciet parakstu šeit...
+                            </div>
+                        </div>
+                        <p id="sig-status" class="text-[11px] text-slate-500">Paraksts nav ievilkts.</p>
+                    </div>
+                </div>
+
+                <!-- STEP SUMMARY: Final Official LU Certificate Summary -->
+                <div id="step-summary" class="wizard-step hidden space-y-6">
+                    <div class="">
+                      <div class="pl-4 py-1">
+                          <h3 class="text-lg font-bold text-lu-blue">Paldies tev un veiksmi studijās!</h3>
+                          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mt-1">
+                            Izmantosim jaunās tehnoloģijas efektīvi un produktīvi!
+                          </p>
+                      </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Wizard Navigation Footer Controls (No Print) -->
+            <div id="wizard-nav-footer" class="bg-slate-50 px-6 py-4 border-t border-slate-200 flex items-center justify-between no-print">
+                <button type="button" id="btn-prev" onclick="goToPrevStep()" class="text-xs font-semibold text-slate-600 hover:text-slate-900 disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-1 py-2 px-3 rounded-lg" disabled>
+                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                    <span>Atpakaļ</span>
+                </button>
+
+                <button type="button" id="btn-next" onclick="goToNextStep()" class="bg-lu-blue hover:bg-lu-blueHover text-white text-xs font-bold px-6 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-1.5 disabled:opacity-40 disabled:cursor-not-allowed" disabled>
+                    <span>Turpināt</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+        let isSignatureDrawn = false;
+        let canvas, ctx, isDrawing = false;
+
+        const stepTitles = {
+            1: "1. Solis: Mākslīgā Intelekta galvenie individuālie riski",
+            2: "2. Solis: LU MI lietošanas Luksofora princips",
+            3: "3. Solis: Studenta paškontrole pirms MI lietošanas",
+            4: "4. Solis: Studējošā identifikācija un parakstīšana"
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            lucide.createIcons();
+            initCanvas();
+            updateStepView();
+        });
+
+        function initCanvas() {
+            canvas = document.getElementById('signature-pad');
+            if (!canvas) return;
+
+            ctx = canvas.getContext('2d');
+
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseleave', stopDrawing);
+
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const touch = e.touches[0];
+                startDrawing(touch);
+            }, { passive: false });
+
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                const touch = e.touches[0];
+                draw(touch);
+            }, { passive: false });
+
+            canvas.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                stopDrawing();
+            }, { passive: false });
+        }
+
+        function resizeCanvas() {
+            if (!canvas) return;
+
+            const rect = canvas.getBoundingClientRect();
+
+            if (rect.width === 0 || rect.height === 0) return;
+
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+
+            ctx = canvas.getContext('2d');
+            ctx.lineWidth = 2.5;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.strokeStyle = '#002855';
+        }
+
+        function getPos(e) {
+            const rect = canvas.getBoundingClientRect();
+
+            return {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            };
+        }
+
+        function startDrawing(e) {
+            if (!ctx) return;
+
+            isDrawing = true;
+
+            const pos = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+        }
+
+        function draw(e) {
+            if (!isDrawing || !ctx) return;
+
+            const pos = getPos(e);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+
+            if (!isSignatureDrawn) {
+                isSignatureDrawn = true;
+
+                const placeholder = document.getElementById('sig-placeholder');
+                if (placeholder) placeholder.classList.add('hidden');
+
+                const status = document.getElementById('sig-status');
+                if (status) {
+                    status.innerText = 'Paraksts sekmīgi ievilkts.';
+                    status.className = 'text-[11px] text-emerald-600 font-semibold';
+                }
+
+                validateCurrentStep();
+            }
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        function clearSignature() {
+            if (!ctx || !canvas) return;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            isSignatureDrawn = false;
+
+            const placeholder = document.getElementById('sig-placeholder');
+            if (placeholder) placeholder.classList.remove('hidden');
+
+            const status = document.getElementById('sig-status');
+            if (status) {
+                status.innerText = 'Paraksts nav ievilkts.';
+                status.className = 'text-[11px] text-slate-500';
+            }
+
+            validateCurrentStep();
+        }
+
+        function validateCurrentStep() {
+            const nextBtn = document.getElementById('btn-next');
+            let isValid = false;
+
+            if (currentStep === 1) {
+                isValid = document.getElementById('chk-step-1').checked;
+            } else if (currentStep === 2) {
+                isValid = document.getElementById('chk-step-2').checked;
+            } else if (currentStep === 3) {
+                const checkboxes = document.querySelectorAll('.chk-self');
+                isValid = Array.from(checkboxes).every(chk => chk.checked);
+            } else if (currentStep === 4) {
+                isValid = isSignatureDrawn;
+            } else {
+                isValid = true;
+            }
+
+            if (nextBtn) {
+                nextBtn.disabled = !isValid;
+            }
+        }
+
+        function updateStepView() {
+            document.querySelectorAll('.wizard-step').forEach(step => {
+                step.classList.add('hidden');
+            });
+
+            const prevBtn = document.getElementById('btn-prev');
+            const nextBtn = document.getElementById('btn-next');
+            const badge = document.getElementById('wizard-step-badge');
+            const headerTitle = document.getElementById('step-title-header');
+            const progressBar = document.getElementById('wizard-progress-bar');
+
+            if (currentStep <= totalSteps) {
+                const currentStepElement = document.getElementById(`step-${currentStep}`);
+                if (currentStepElement) {
+                    currentStepElement.classList.remove('hidden');
+                }
+
+                if (currentStep === 4) {
+                    setTimeout(() => {
+                        resizeCanvas();
+                    }, 50);
+                }
+
+                if (badge) badge.innerText = `Solis ${currentStep} no ${totalSteps}`;
+                if (headerTitle) headerTitle.innerText = stepTitles[currentStep];
+                if (progressBar) progressBar.style.width = `${(currentStep / totalSteps) * 100}%`;
+
+                if (prevBtn) prevBtn.disabled = currentStep === 1;
+
+                if (nextBtn) {
+                    nextBtn.classList.remove('hidden');
+                    nextBtn.querySelector('span').innerText =
+                        currentStep === totalSteps ? 'Apstiprināt un parakstīt' : 'Turpināt';
+                }
+            } else {
+                const summary = document.getElementById('step-summary');
+                if (summary) summary.classList.remove('hidden');
+
+                if (badge) badge.innerText = 'Pabeigts';
+                if (headerTitle) headerTitle.innerText = 'Gala apliecinājums izveidots';
+                if (progressBar) progressBar.style.width = '100%';
+
+                if (prevBtn) prevBtn.disabled = false;
+                if (nextBtn) nextBtn.classList.add('hidden');
+
+                generateCertificateData();
+            }
+
+            validateCurrentStep();
+        }
+
+        function goToNextStep() {
+            if (currentStep <= totalSteps) {
+                currentStep++;
+                updateStepView();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function goToPrevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStepView();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function generateCertificateData() {
+            const certDate = document.getElementById('cert-date');
+            if (certDate) {
+                certDate.innerText = new Date().toLocaleDateString('lv-LV');
+            }
+
+            const certSigImg = document.getElementById('cert-sig-img');
+            if (canvas && certSigImg) {
+                certSigImg.src = canvas.toDataURL('image/png');
+            }
+
+            // These fields do not currently exist in your HTML,
+            // so set safe fallback text instead of causing an error.
+            const certName = document.getElementById('cert-name');
+            const certId = document.getElementById('cert-id');
+            const certFaculty = document.getElementById('cert-faculty');
+            const certProgram = document.getElementById('cert-program');
+
+            if (certName) certName.innerText = '';
+            if (certId) certId.innerText = '';
+            if (certFaculty) certFaculty.innerText = '';
+            if (certProgram) certProgram.innerText = '';
+        }
+    </script>
+</body>
+</html>
